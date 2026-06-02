@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  registry: your-registry
+  registry: ghcr.io/milanpanic2
   name: web-scraper
   tag: main
   pullPolicy: Always
