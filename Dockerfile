@@ -30,13 +30,14 @@ RUN apt-get update && apt-get install -y \
     xdg-utils \
     && rm -rf /var/lib/apt/lists/*
 
-COPY pyproject.toml uv.lock alembic.ini main.py ./
+COPY pyproject.toml uv.lock main.py ./
+# COPY alembic.ini ./
 RUN uv sync --no-dev --no-install-project
 
 # Run crawl4ai setup (installs browsers)
 RUN uv run crawl4ai-setup
 
-COPY db_migrations/ db_migrations/
+# COPY db_migrations/ db_migrations/
 COPY src/ src/
 
 CMD ["uv", "run", "python", "main.py"]

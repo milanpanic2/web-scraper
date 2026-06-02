@@ -24,6 +24,7 @@ config:
   debug: "false"
   maxConcurrentScrapers: "5"
   scraperTimeout: "30"
+  otelEndpoint: "http://alloy.monitoring.svc.cluster.local:4317"
 
 database:
   host: "postgresql"
