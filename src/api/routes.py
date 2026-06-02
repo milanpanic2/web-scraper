@@ -6,6 +6,7 @@ from src.api.schemas import ScrapeRequest, ScrapeJobResponse, ScrapeUrlRequest, 
 from src.scraper.service import ScraperService
 from src.search.service import SearchService
 from src.api.dependencies import get_scraper_service, get_user_id, get_search_service
+from src.config.settings import settings
 
 
 router = APIRouter(prefix="/api/v1", tags=["scraper"])
@@ -53,3 +54,12 @@ async def search_with_duck_duck_go(
     user_id: str = Depends(get_user_id),
     search_service: SearchService = Depends(get_search_service)):
     return await search_service.search_with_duck_duck_go(body.search_query, body.max_results)
+
+
+@router.get("/health")
+def health_check():
+    """Health check endpoint."""
+    return {
+        "status": "healthy",
+        "environment": settings.environment
+    }

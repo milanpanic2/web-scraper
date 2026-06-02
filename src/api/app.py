@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from src.api.routes import router
-from src.database.connection import init_db, AsyncSessionLocal, async_engine
+from src.database.connection import init_db, AsyncSessionLocal, sync_engine
 from src.scraper.service import ScraperService
 from src.scraper.config import build_scraper_configs
 from src.config.settings import settings
@@ -28,7 +28,7 @@ async def lifespan(fast_api_app: FastAPI):
     alembic_cfg = Config("alembic.ini")
     command.upgrade(alembic_cfg, "head")
 
-    init_telemetry(fast_api_app, async_engine)
+    init_telemetry(fast_api_app, sync_engine)
 
     fast_api_app.state.scraper_configs = build_scraper_configs()
 
@@ -58,11 +58,3 @@ app = FastAPI(
 
 app.include_router(router)
 
-
-@app.get("/health")
-def health_check():
-    """Health check endpoint."""
-    return {
-        "status": "healthy",
-        "environment": settings.environment
-    }
