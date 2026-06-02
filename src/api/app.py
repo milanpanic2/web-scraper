@@ -25,8 +25,8 @@ async def lifespan(fast_api_app: FastAPI):
 
     init_db()
 
-    alembic_cfg = Config("alembic.ini")
-    command.upgrade(alembic_cfg, "head")
+    # alembic_cfg = Config("alembic.ini")
+    # command.upgrade(alembic_cfg, "head")
 
     init_telemetry(fast_api_app, sync_engine)
 
