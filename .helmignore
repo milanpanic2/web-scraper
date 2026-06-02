@@ -1,0 +1,8 @@
+*.tgz
+.DS_Store
+.git/
+.idea/
+.vscode/
+__pycache__/
+.venv/
+results/

@@ -1,0 +1,36 @@
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# Results and data
+results/
+test-data/
+
+# Documentation
+README.md
+*.md
+
+# CI/CD
+.github/
+
+# Kubernetes manifests
+k8s/
+*.yaml

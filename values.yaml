@@ -1,0 +1,59 @@
+replicaCount: 1
+
+image:
+  registry: your-registry
+  name: web-scraper
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+
+ingress:
+  enabled: true
+  host: scraper.local
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+
+config:
+  apiHost: "0.0.0.0"
+  apiPort: "8000"
+  environment: "default"
+  debug: "true"
+  maxConcurrentScrapers: "5"
+  scraperTimeout: "30"
+
+database:
+  host: "global-postgresql-rw.databases.svc.cluster.local"
+  port: "5432"
+  name: ""
+  user: ""
+  secretName: ""
+
+storage:
+  size: 10Gi
+
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "250m"
+  limits:
+    memory: "2Gi"
+    cpu: "1000m"
+
+probes:
+  liveness:
+    httpGet:
+      path: /health
+      port: 8000
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    failureThreshold: 3
+  readiness:
+    httpGet:
+      path: /health
+      port: 8000
+    initialDelaySeconds: 10
+    periodSeconds: 5
