@@ -21,7 +21,7 @@ config:
   apiHost: "0.0.0.0"
   apiPort: "8000"
   environment: "default"
-  debug: "true"
+  debug: "false"
   maxConcurrentScrapers: "5"
   scraperTimeout: "30"
 
