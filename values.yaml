@@ -26,18 +26,18 @@ config:
   scraperTimeout: "30"
 
 database:
-  host: "global-postgresql-rw.databases.svc.cluster.local"
+  host: "postgresql"
   port: "5432"
-  name: ""
-  user: ""
-  secretName: ""
+  name: "web-scraper"
+  user: "cluster_user"
+  secretName: "cluster-secret"
 
 storage:
   size: 10Gi
 
 resources:
   requests:
-    memory: "512Mi"
+    memory: "256Mi"
     cpu: "250m"
   limits:
     memory: "2Gi"
