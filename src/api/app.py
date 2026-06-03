@@ -33,13 +33,13 @@ async def lifespan(fast_api_app: FastAPI):
     fast_api_app.state.scraper_configs = build_scraper_configs()
 
     fast_api_app.state.scheduler = AsyncIOScheduler()
-    fast_api_app.state.scheduler.add_job(
-        func=scheduled_scrape_all,
-        args=[fast_api_app.state.scraper_configs],
-        trigger="interval",
-        hours=12,
-        id="scrape_all_jobs"
-    )
+    # fast_api_app.state.scheduler.add_job(
+    #     func=scheduled_scrape_all,
+    #     args=[fast_api_app.state.scraper_configs],
+    #     trigger="interval",
+    #     hours=12,
+    #     id="scrape_all_jobs"
+    # )
     fast_api_app.state.scheduler.start()
     print("Scheduler started - scraping every 12 hours")
 

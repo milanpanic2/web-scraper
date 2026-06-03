@@ -9,6 +9,11 @@ metadata:
   annotations:
     {{- toYaml .Values.ingress.annotations | nindent 4 }}
 spec:
+  ingressClassName: traefik
+  tls:
+  - secretName: {{ .Chart.Name }}-tls
+    hosts:
+    - {{ .Values.ingress.host }}
   rules:
   - host: {{ .Values.ingress.host }}
     http:

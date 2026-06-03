@@ -13,9 +13,11 @@ service:
 
 ingress:
   enabled: true
-  host: scraper.local
+  host: scraper.homelab.com
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
+    cert-manager.io/cluster-issuer: homelab-ca-issuer
+    # ForwardAuth via auth service - requires valid JWT to access
+    traefik.ingress.kubernetes.io/router.middlewares: apps-auth-verify@kubernetescrd
 
 config:
   apiHost: "0.0.0.0"
