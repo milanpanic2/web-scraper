@@ -16,14 +16,13 @@ ingress:
   host: scraper.homelab.com
   annotations:
     cert-manager.io/cluster-issuer: homelab-ca-issuer
-    # ForwardAuth via auth service - requires valid JWT to access
-    traefik.ingress.kubernetes.io/router.middlewares: apps-auth-verify@kubernetescrd
 
 config:
   apiHost: "0.0.0.0"
   apiPort: "8000"
   environment: "default"
   debug: "false"
+  authConfigMap: "auth-config"
   maxConcurrentScrapers: "5"
   scraperTimeout: "30"
   otelEndpoint: "http://alloy.monitoring.svc.cluster.local:4317"

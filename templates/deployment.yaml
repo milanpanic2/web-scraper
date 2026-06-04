@@ -25,8 +25,15 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ .Chart.Name }}-config
+        - configMapRef:
+            name: {{ .Values.config.authConfigMap }}
         env:
         - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.database.secretName }}
+              key: password
+        - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
               name: {{ .Values.database.secretName }}

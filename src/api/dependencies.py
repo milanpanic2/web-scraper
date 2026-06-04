@@ -1,3 +1,4 @@
+import jwt
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import Depends, Request, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -5,13 +6,21 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.database.connection import get_db
 from src.scraper.service import ScraperService
 from src.search.service import SearchService
+from src.config import settings
 
 
 async def get_user_id(request: Request) -> str:
-    user_id = request.headers.get("x-user-id")
-    if not user_id:
-        raise HTTPException(status_code=403, detail="Missing x-user-id header")
-    return user_id
+    auth = request.headers.get("Authorization")
+    if not auth or not auth.startswith("Bearer "):
+        raise HTTPException(401, "Missing token")
+    try:
+        payload = jwt.decode(auth[7:], settings.jwt_secret, algorithms=[settings.jwt_algorithm])
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(401, "Token expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(401, "Invalid token")
+    return payload["sub"]
+    
 
 async def get_scraper_service(request: Request, db: AsyncSession = Depends(get_db)) -> ScraperService:
     return ScraperService(db=db, scraper_configs=request.app.state.scraper_configs)

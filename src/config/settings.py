@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     postgresql_password: str = ""
     db_pool_size: int = 2
     db_max_overflow: int = 3
+    jwt_secret: str = ""
+    jwt_algorithm: str = "HS256"
+    jwt_expiration_minutes: int = 1440
     max_concurrent_scrapers: int = 5
     scraper_timeout: int = 30
     otel_endpoint: str = "http://localhost:4317"
