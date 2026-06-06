@@ -1,14 +1,13 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from fastapi import FastAPI
+
 from src.api.routes import router
-from src.database.connection import init_db, AsyncSessionLocal, sync_engine
-from src.scraper.service import ScraperService
-from src.scraper.config import build_scraper_configs
-from src.config.settings import settings
 from src.config.telemetry import init_telemetry
-from alembic import command
-from alembic.config import Config
+from src.database.connection import AsyncSessionLocal, init_db, sync_engine
+from src.scraper.config import build_scraper_configs
+from src.scraper.service import ScraperService
 
 
 async def scheduled_scrape_all(scraper_configs):

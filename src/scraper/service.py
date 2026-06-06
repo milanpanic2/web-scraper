@@ -2,21 +2,18 @@ import asyncio
 import json
 from collections import defaultdict
 from collections.abc import AsyncGenerator
-from datetime import datetime, UTC
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Final, cast
 
 import aiofiles
-from crawl4ai import AsyncWebCrawler, CrawlResult, CrawlerRunConfig, BrowserConfig
+from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CrawlResult
 from fastapi import HTTPException
 from sqlalchemy import select
-from sqlalchemy.engine.result import Result
 from sqlalchemy.ext.asyncio import AsyncSession
-from starlette.responses import StreamingResponse
 
 from src.database.models import ScrapeJob
 from src.scraper.config import ScraperType
-from src.scraper.models import ScrapedResult
 
 
 class ScraperService:
@@ -48,7 +45,7 @@ class ScraperService:
             return result
 
     
-    async def scrape_url_bulk(self, urls: list[str]) -> AsyncGenerator[CrawlResult, None]:
+    async def scrape_url_bulk(self, urls: list[str]) -> AsyncGenerator[CrawlResult]:
         run_config = self.scraper_configs[ScraperType.SINGLE]
         browser_config = BrowserConfig(verbose=True)
 
@@ -65,7 +62,7 @@ class ScraperService:
                 yield result
 
 
-    async def deep_scrape_news_url(self, url: str) -> AsyncGenerator[CrawlResult, None]:
+    async def deep_scrape_news_url(self, url: str) -> AsyncGenerator[CrawlResult]:
         run_config = self.scraper_configs[ScraperType.NEWS]
         browser_config = BrowserConfig(verbose=True)
 

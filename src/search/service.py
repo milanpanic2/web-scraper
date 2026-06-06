@@ -1,6 +1,7 @@
 import asyncio
-from sqlalchemy.ext.asyncio import AsyncSession
+
 from duckduckgo_search import DDGS
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class SearchService():

@@ -1,13 +1,12 @@
-from fastapi import APIRouter, Depends, Header, HTTPException
+from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import HttpUrl
-from starlette.requests import Request
-from src.api.schemas import ScrapeRequest, ScrapeJobResponse, ScrapeUrlRequest, SearchRequest
+
+from src.api.dependencies import get_scraper_service, get_search_service, get_user_id
+from src.api.schemas import ScrapeJobResponse, ScrapeRequest, ScrapeUrlRequest, SearchRequest
+from src.config.settings import settings
 from src.scraper.service import ScraperService
 from src.search.service import SearchService
-from src.api.dependencies import get_scraper_service, get_user_id, get_search_service
-from src.config.settings import settings
-
 
 router = APIRouter(prefix="/api/v1", tags=["scraper"])
 

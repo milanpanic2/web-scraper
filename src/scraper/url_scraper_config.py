@@ -1,4 +1,4 @@
-from crawl4ai import CrawlerRunConfig, CacheMode
+from crawl4ai import CacheMode, CrawlerRunConfig
 from crawl4ai.content_scraping_strategy import LXMLWebScrapingStrategy
 
 

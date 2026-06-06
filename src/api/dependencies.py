@@ -1,12 +1,12 @@
 import jwt
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from fastapi import Depends, Request, HTTPException
+from fastapi import Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.config import settings
 from src.database.connection import get_db
 from src.scraper.service import ScraperService
 from src.search.service import SearchService
-from src.config import settings
 
 
 async def get_user_id(request: Request) -> str:
@@ -16,9 +16,9 @@ async def get_user_id(request: Request) -> str:
     try:
         payload = jwt.decode(auth[7:], settings.jwt_secret, algorithms=[settings.jwt_algorithm])
     except jwt.ExpiredSignatureError:
-        raise HTTPException(401, "Token expired")
+        raise HTTPException(401, "Token expired") from None
     except jwt.InvalidTokenError:
-        raise HTTPException(401, "Invalid token")
+        raise HTTPException(401, "Invalid token") from None
     return payload["sub"]
     
 

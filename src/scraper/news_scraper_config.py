@@ -1,4 +1,4 @@
-from crawl4ai import CrawlerRunConfig, CacheMode, FilterChain, URLPatternFilter, ContentTypeFilter
+from crawl4ai import CacheMode, ContentTypeFilter, CrawlerRunConfig, FilterChain, URLPatternFilter
 from crawl4ai.content_scraping_strategy import LXMLWebScrapingStrategy
 from crawl4ai.deep_crawling import BFSDeepCrawlStrategy
 
