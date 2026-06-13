@@ -1468,6 +1468,20 @@ wheels = [
 ]
 
 [[package]]
+name = "opentelemetry-instrumentation-logging"
+version = "0.63b1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-instrumentation" },
+    { name = "opentelemetry-semantic-conventions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d1/cf/119381b1ae446fb07921a452e3a8e1887aa87f9856225f9829958dc20063/opentelemetry_instrumentation_logging-0.63b1.tar.gz", hash = "sha256:aa57d1bcb8931186b5dde565e9c17c572cf02412572d962da5b1a17ee5637d2c", size = 19823, upload-time = "2026-05-21T16:36:37.276Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b6/71/1ba447311adf33023be14a1a309852c4cf74219f095d0055a54c1824d9ff/opentelemetry_instrumentation_logging-0.63b1-py3-none-any.whl", hash = "sha256:6b3aac8d18bc897468814d5ce4ed00f9d43588c583b4ba2288267e191b96d944", size = 15993, upload-time = "2026-05-21T16:35:35.851Z" },
+]
+
+[[package]]
 name = "opentelemetry-instrumentation-sqlalchemy"
 version = "0.63b1"
 source = { registry = "https://pypi.org/simple" }
@@ -2591,6 +2605,7 @@ dependencies = [
     { name = "opentelemetry-api" },
     { name = "opentelemetry-exporter-otlp-proto-grpc" },
     { name = "opentelemetry-instrumentation-fastapi" },
+    { name = "opentelemetry-instrumentation-logging" },
     { name = "opentelemetry-instrumentation-sqlalchemy" },
     { name = "opentelemetry-sdk" },
     { name = "psycopg2-binary" },
@@ -2612,6 +2627,7 @@ requires-dist = [
     { name = "opentelemetry-api", specifier = ">=1.42.1" },
     { name = "opentelemetry-exporter-otlp-proto-grpc", specifier = ">=1.42.1" },
     { name = "opentelemetry-instrumentation-fastapi", specifier = ">=0.63b1" },
+    { name = "opentelemetry-instrumentation-logging", specifier = ">=0.63b1" },
     { name = "opentelemetry-instrumentation-sqlalchemy", specifier = ">=0.63b1" },
     { name = "opentelemetry-sdk", specifier = ">=1.42.1" },
     { name = "psycopg2-binary", specifier = ">=2.9.11" },
