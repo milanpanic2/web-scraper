@@ -31,7 +31,6 @@ database:
   host: "postgresql"
   port: "5432"
   name: "web-scraper"
-  user: "cluster_user"
   secretName: "cluster-secret"
 
 storage:

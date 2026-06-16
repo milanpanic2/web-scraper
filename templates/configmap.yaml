@@ -12,7 +12,6 @@ data:
   DEBUG: {{ .Values.config.debug | quote }}
   MAX_CONCURRENT_SCRAPERS: {{ .Values.config.maxConcurrentScrapers | quote }}
   SCRAPER_TIMEOUT: {{ .Values.config.scraperTimeout | quote }}
-  POSTGRESQL_USER: {{ .Values.database.user | quote }}
   POSTGRESQL_HOST: {{ .Values.database.host | quote }}
   POSTGRESQL_PORT: {{ .Values.database.port | quote }}
   POSTGRESQL_DB_NAME: {{ .Values.database.name | quote }}

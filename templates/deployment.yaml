@@ -28,6 +28,11 @@ spec:
         - configMapRef:
             name: {{ .Values.config.authConfigMap }}
         env:
+        - name: POSTGRESQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.database.secretName }}
+              key: username
         - name: POSTGRESQL_PASSWORD
           valueFrom:
             secretKeyRef:
